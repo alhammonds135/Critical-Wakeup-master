@@ -20,6 +20,7 @@ public class AlarmService extends Service {
     private int hour;
     private int min;
     private String Tag = "Alarm Service,";
+    private String alarmName;
     private int critNum;
 
     class AlarmServiceBinder extends Binder {
@@ -34,6 +35,7 @@ public class AlarmService extends Service {
         hour = intent.getExtras().getInt("hour");
         min = intent.getExtras().getInt("min");
         critNum = intent.getExtras().getInt("crit");
+        alarmName = intent.getExtras().getString("name");
         isOn = true;
 
         new Thread(new Runnable() {
@@ -93,9 +95,9 @@ public class AlarmService extends Service {
                     startService(sound);
                     soundOn = true;
                     Intent activeAlarm = new Intent(getApplicationContext(), AlarmActive.class);
-                    activeAlarm.putExtra("AlarmName", "Test Alarm"); //TODO make this have the actual alarm name
                     activeAlarm.putExtra("hour", hour);
                     activeAlarm.putExtra("Min", min);
+                    activeAlarm.putExtra("name", alarmName);
                     startActivity(activeAlarm);
             }
         }

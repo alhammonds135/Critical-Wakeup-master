@@ -47,9 +47,11 @@ public class EditAlarm extends AppCompatActivity {
                 alarmService.putExtra("hour", hour);
                 alarmService.putExtra("min", min);
                 alarmService.putExtra("crit", critVal);
+                alarmService.putExtra("name", aName.getText().toString());
                 startService(alarmService);
                 back = new Intent(EditAlarm.this, AlarmPage.class);
-                back.putExtra("sName",aName.getText().toString());
+                back.putExtra("aName",aName.getText().toString());
+                back.putExtra("time", (hour + ":" + min));
                 back.putExtra("critical",crit.getText().toString());
                 back();
             }

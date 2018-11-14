@@ -17,14 +17,17 @@ public class AlarmActive extends AppCompatActivity {
 
         int hour = getIntent().getIntExtra("hour", 0);
         int min = getIntent().getIntExtra("Min", 0);
+        String name = getIntent().getStringExtra("name");
 
 
-
+        String amPm = "";
         String hourFormatted;
         if(hour > 12) {
             hourFormatted = String.valueOf(hour - 12);
+            amPm = " PM";
         } else {
             hourFormatted = String.valueOf(hour);
+            amPm = " AM";
         }
 
         String minFormatted;
@@ -36,9 +39,8 @@ public class AlarmActive extends AppCompatActivity {
 
         TextView tv = (TextView)findViewById(R.id.fullscreen_content);
         TextView tv2 = findViewById(R.id.textView2);
-        tv2.setText(hourFormatted + ":" + minFormatted);
-        String s = getIntent().getStringExtra("AlarmName");
-        tv.setText(s);
+        tv2.setText(hourFormatted + ":" + minFormatted + amPm);
+        tv.setText(name);
         //TODO make the alarm time appear via intent
         Button close = (Button)findViewById(R.id.dummy_button);
         close.setOnClickListener(new View.OnClickListener() {

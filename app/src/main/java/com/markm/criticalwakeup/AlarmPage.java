@@ -3,6 +3,7 @@ package com.markm.criticalwakeup;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -23,6 +24,19 @@ public class AlarmPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_page);
+        Button button = findViewById(R.id.button1);
+        Intent intent = getIntent();
+        Bundle extra = intent.getExtras();
+        if (extra != null){
+            String s = getIntent().getExtras().getString("aName");
+            String time = getIntent().getExtras().getString("time");
+            String critical = getIntent().getExtras().getString("critical");
+            s = s + "\n" + time + "\n" + critical;
+            button.setText(s);
+            Log.i("Alarm Extra", "Its invisible!");
+            button.setVisibility(View.VISIBLE);
+        }
+        Log.i("Alarm Extra","it skipped the if statement...");
 
         add = findViewById(R.id.add);
         add.setText("Add Alarm");
