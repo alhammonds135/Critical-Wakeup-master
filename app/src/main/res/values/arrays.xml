@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="critLevel">
+        <item>0:Critical</item>
+        <item>1:Medium</item>
+        <item>2:Low</item>
+    </string-array>
+</resources>

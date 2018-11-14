@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Critical Wakeup</string>
+    <string name="title_activity_alarm_home">AlarmHome</string>
+
+    <string name="title_activity_alarm_active">AlarmActive</string>
+    <string name="close_button">CLOSE</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>
