@@ -6,6 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Button;
 
 import java.util.Calendar;
 
@@ -22,6 +23,7 @@ public class AlarmService extends Service {
     private String Tag = "Alarm Service,";
     private String alarmName;
     private int critNum;
+    Button repeatAlarm;
 
     class AlarmServiceBinder extends Binder {
         public AlarmService getService(){

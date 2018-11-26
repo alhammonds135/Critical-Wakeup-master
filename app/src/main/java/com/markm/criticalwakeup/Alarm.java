@@ -1,5 +1,7 @@
 package com.markm.criticalwakeup;
 
+import android.view.View;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

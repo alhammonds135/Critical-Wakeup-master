@@ -17,7 +17,7 @@ public class EditAlarm extends AppCompatActivity {
 
     private EditText aName;
     private TextView crit;
-    private Button create, cancel;
+    private Button create, cancel,repeatAlarm,selectPuzzle;
     private RadioButton high, med, low;
     private int hour, min, critVal;
     private TimePicker timePicker;
@@ -88,6 +88,29 @@ public class EditAlarm extends AppCompatActivity {
                     critVal = 1;
             }
         });
+//*************************************************************
+        repeatAlarm =findViewById(R.id.repeatAlarm);
+        // repeatAlarm.setText("Add Alarm");
+        repeatAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(EditAlarm.this,RepeatAlarm.class);
+                startActivity(in);
+            }
+        });
+
+
+        selectPuzzle =findViewById(R.id.selectPuzzle);
+        // repeatAlarm.setText("Add Alarm");
+        selectPuzzle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(EditAlarm.this,SelectPuzzle.class);
+                startActivity(in);
+            }
+        });
+
+//****************************************************
 
     }
 

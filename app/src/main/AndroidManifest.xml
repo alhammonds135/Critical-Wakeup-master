@@ -35,6 +35,26 @@
         <service android:name=".AlarmService" />
 
         <activity android:name=".AlarmActive"></activity>
+
+        <activity
+            android:name=".RepeatAlarm"
+            android:label="Repeat Alarm">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SelectPuzzle"
+            android:label="Select Puzzle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
