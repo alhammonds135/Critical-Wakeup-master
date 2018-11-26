@@ -52,9 +52,12 @@ public class AlarmService extends Service {
         while(isOn){
             cal = Calendar.getInstance();
             int hourLeft = hour - cal.get(Calendar.HOUR_OF_DAY);
-            Log.i(Tag, "Hour: "+ hour + " Calendar Hour: "+ Calendar.HOUR +" Hour Left: " + hourLeft);
+            if(hourLeft < 0)
+                hourLeft = hourLeft * -1;
+            Log.i(Tag, "Hour: "+ hour + " Calendar Hour: "+ cal.get(Calendar.HOUR_OF_DAY)+" Hour Left: " + hourLeft);
             int minLeft = min - cal.get(Calendar.MINUTE);
-            Log.i(Tag, "Min: "+ min + " Calendar Min: "+ Calendar.MINUTE + " Min Left: " + minLeft);
+            Log.i(Tag, "Min: "+ min + " Calendar Min: "+ cal.get(Calendar.MINUTE) + " Min Left: " + minLeft);
+
             if(hourLeft > 0){
                 try{
                     Log.i(Tag, "More than an hour");
