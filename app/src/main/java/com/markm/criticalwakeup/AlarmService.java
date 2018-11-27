@@ -110,6 +110,9 @@ public class AlarmService extends Service {
         isOn = false;
     }
 
+    public void pickPuzzle(){
+
+    }
 
     @Override
     public void onDestroy() {
