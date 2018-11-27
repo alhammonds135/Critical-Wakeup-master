@@ -46,6 +46,10 @@ public class Alarm {
         }
     }
 
+    public int getHour() {
+        return hour;
+    }
+
     @Override
     public String toString() {
         return "It's running boyyyy"; //TODO what...
