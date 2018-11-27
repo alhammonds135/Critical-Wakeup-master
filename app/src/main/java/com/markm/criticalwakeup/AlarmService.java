@@ -2,11 +2,15 @@ package com.markm.criticalwakeup;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -23,6 +27,7 @@ public class AlarmService extends Service {
     private String Tag = "Alarm Service,";
     private String alarmName;
     private int critNum;
+    ArrayList<Alarm> alarmsList;
 
     class AlarmServiceBinder extends Binder {
         public AlarmService getService(){
@@ -34,10 +39,18 @@ public class AlarmService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId){
         //make a linked list of all the alarms in the Gson
-        hour = intent.getExtras().getInt("hour");
-        min = intent.getExtras().getInt("min");
-        critNum = intent.getExtras().getInt("crit");
-        alarmName = intent.getExtras().getString("name");
+        alarmsList = new ArrayList<Alarm>();
+        SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
+        int numOfAlarms = prefs.getInt("numOfAlarms", 0);
+        Gson gson = new Gson();
+        String json = "";
+        Alarm alarm;
+        for (int i = 1; i < numOfAlarms; i++){
+            String key = "Alarm"+i;
+            json = prefs.getString(key, "");
+            alarm = gson.fromJson(json, Alarm.class);
+            alarmsList.add(alarm);
+        }
         isOn = true;
 
         new Thread(new Runnable() {
@@ -52,50 +65,34 @@ public class AlarmService extends Service {
 
     public void startService(){
         while(isOn){
-            cal = Calendar.getInstance();
-            int hourLeft = hour - cal.get(Calendar.HOUR_OF_DAY);
-            if(hourLeft < 0)
-                hourLeft = hourLeft * -1;
-            Log.i(Tag, "Hour: "+ hour + " Calendar Hour: "+ cal.get(Calendar.HOUR_OF_DAY)+" Hour Left: " + hourLeft);
-            int minLeft = min - cal.get(Calendar.MINUTE);
-            Log.i(Tag, "Min: "+ min + " Calendar Min: "+ cal.get(Calendar.MINUTE) + " Min Left: " + minLeft);
+            for (int i = 0; i < alarmsList.size(); i++) {
+                cal = Calendar.getInstance();
+                hour = alarmsList.get(i).getHour();
+                int hourLeft = hour - cal.get(Calendar.HOUR_OF_DAY);
+                if (hourLeft < 0)
+                    hourLeft = hourLeft * -1;
+                Log.i(Tag, "Hour: " + hour + " Calendar Hour: " + cal.get(Calendar.HOUR_OF_DAY) + " Hour Left: " + hourLeft);
+                int minLeft = min - cal.get(Calendar.MINUTE);
+                Log.i(Tag, "Min: " + min + " Calendar Min: " + cal.get(Calendar.MINUTE) + " Min Left: " + minLeft);
 
-            if(hourLeft > 0){
-                try{
+                //find a way not to have to check everything
+                if (hourLeft > 0) {
                     Log.i(Tag, "More than an hour");
-                    Thread.sleep(1800000);
-                } catch (InterruptedException e) {
-                    Log.i(Tag, "Thread Interrupted");
                 }
-            }
-            else if( minLeft > 30){
-                try{
+                else if (minLeft > 30) {
                     Log.i(Tag, "More than 30 min");
-                    Thread.sleep(900000);
-                } catch (InterruptedException e) {
-                    Log.i(Tag, "Thread Interrupted");
                 }
-            }
-            else if(minLeft > 5){
-                try{
+                else if (minLeft > 5) {
                     Log.i(Tag, "More than 5 min");
-                    Thread.sleep(300000);
-                } catch (InterruptedException e) {
-                    Log.i(Tag, "Thread Interrupted");
                 }
-            }
-            else if(minLeft >= 1){
-                try{
+                else if (minLeft >= 1) {
                     Log.i(Tag, "More than 1 min");
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Log.i(Tag, "Thread Interrupted");
                 }
-            }
-            else{
-                Log.i(Tag, "Less than a min");
+                else {
+                    Log.i(Tag, "Less than a min");
                     isOn = false;
-                    pickPuzzle();
+                    pickPuzzle(i);
+                }
             }
         }
     }
@@ -104,7 +101,7 @@ public class AlarmService extends Service {
         isOn = false;
     }
 
-    public void pickPuzzle(){
+    public void pickPuzzle(int i){
         sound = new Intent(getApplicationContext(), SoundService.class);
         sound.putExtra("crit", critNum);
         startService(sound);
@@ -122,15 +119,14 @@ public class AlarmService extends Service {
                 //activity = ActivityOne.class;
                 break;
             case 2:
-                //Send Barcode
-                //activity = ActivityTwo.class;
+                activity = BarcodeActivity.class;
                 break;
             default:
                 //defaults to math
-                //activity = ActivityTree.class;
+                activity = BarcodeActivity.class;
                 break;
         }
-        Intent activeAlarm = new Intent(getApplicationContext(), AlarmActive.class);
+        Intent activeAlarm = new Intent(getApplicationContext(), activity);
         activeAlarm.putExtra("hour", hour);
         activeAlarm.putExtra("Min", min);
         activeAlarm.putExtra("name", alarmName);
