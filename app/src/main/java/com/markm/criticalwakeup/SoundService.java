@@ -2,10 +2,14 @@ package com.markm.criticalwakeup;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+
+import java.io.IOException;
 
 public class SoundService extends Service {
 
@@ -23,17 +27,45 @@ public class SoundService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         critNum = intent.getExtras().getInt("crit");
+        player = new MediaPlayer();
+        player.setAudioStreamType(AudioManager.STREAM_ALARM);
+        player.setLooping(true);
         if(critNum == 1){
-            player = MediaPlayer.create(this, R.raw.gymnopedie);
+            Uri sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.gymnopedie);
+            try {
+                player.setDataSource(this, sound);
+                player.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if(critNum == 2){
-            player = MediaPlayer.create(this, R.raw.rooster);
+            Uri sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.rooster);
+            try {
+                player.setDataSource(this, sound);
+                player.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if(critNum == 3){
-            player = MediaPlayer.create(this, R.raw.tornado);
+            Uri sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tornado);
+            try {
+                player.setDataSource(this, sound);
+                player.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-        player.setLooping(true);
+        else{
+            Uri sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.gymnopedie);
+            try {
+                player.setDataSource(this, sound);
+                player.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         new Thread(new Runnable() {
