@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AlarmPage"
-            android:label=""/>
-        <activity
             android:name=".EditAlarm"
             android:label="Edit Alarm">
         </activity>
