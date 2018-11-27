@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AlarmPage"
-            android:label=""/>
-        <activity
             android:name=".EditAlarm"
             android:label="Edit Alarm">
         </activity>
@@ -37,6 +34,7 @@
             android:theme="@style/zxing_CaptureTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".BarcodeActivity"></activity>
+        <activity android:name=".MathPuzzle" />
     </application>
 
 </manifest>

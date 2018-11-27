@@ -35,7 +35,7 @@ public class BarcodeActivity extends AppCompatActivity {
             if (result.getContents() != null) {
                 Intent sound = new Intent(getApplicationContext(), SoundService.class);
                 stopService(sound);
-                Intent mainScreen = new Intent(getApplicationContext(), AlarmPage.class);
+                Intent mainScreen = new Intent(getApplicationContext(), AlarmHome.class);
                 startActivity(mainScreen);
             } else if (resultCode == RESULT_CANCELED) {
                 // Handle cancel

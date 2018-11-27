@@ -53,19 +53,6 @@ public class AlarmService extends Service {
         }
         isOn = true;
 
-        ArrayList<Alarm> alarmsList = new ArrayList<Alarm>();
-        SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
-        int numOfAlarms = prefs.getInt("numOfAlarms", 0);
-        Gson gson = new Gson();
-        String json = "";
-        Alarm alarm;
-        for (int i = 1; i < numOfAlarms; i++){
-            String key = "Alarm"+i;
-            json = prefs.getString(key, "");
-            alarm = gson.fromJson(json, Alarm.class);
-            alarmsList.add(alarm);
-        }
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -124,22 +111,22 @@ public class AlarmService extends Service {
         // The '2' is the number of activities
 
         Class activity = null;
+        Intent activeAlarm = new Intent();
 
         // Here, we are checking to see what the output of the random was
-        switch(number) {
+        switch(1) {
             case 1:
-                //send Math Puzzle
-                //activity = ActivityOne.class;
+                activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
+                activeAlarm.putExtra("difficulty", 1);
                 break;
             case 2:
-                activity = BarcodeActivity.class;
+                activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
                 break;
             default:
                 //defaults to math
-                activity = BarcodeActivity.class;
+                activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
                 break;
         }
-        Intent activeAlarm = new Intent(getApplicationContext(), activity);
         activeAlarm.putExtra("hour", hour);
         activeAlarm.putExtra("Min", min);
         activeAlarm.putExtra("name", alarmName);

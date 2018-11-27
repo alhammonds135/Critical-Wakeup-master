@@ -59,10 +59,6 @@ public class Alarm {
         return name;
     }
 
-    public int getHour() {
-        return hour;
-    }
-
     public int getMinute() {
         return minute;
     }
