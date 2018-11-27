@@ -3,8 +3,8 @@
     package="com.markm.criticalwakeup">
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -29,13 +29,14 @@
         <service android:name=".SoundService" />
         <service android:name=".AlarmService" />
 
-        <activity android:name=".AlarmActive"></activity>
+        <activity android:name=".AlarmActive" />
         <activity
             android:name=".AnyOrientationCaptureActivity"
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".BarcodeActivity"></activity>
     </application>
 
 </manifest>
