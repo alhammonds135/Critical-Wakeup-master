@@ -47,8 +47,6 @@
             android:visibility="visible"
             tools:layout_editor_absoluteX="13dp"
             tools:layout_editor_absoluteY="53dp">
-
-
         </TableLayout>
     </ScrollView>
 

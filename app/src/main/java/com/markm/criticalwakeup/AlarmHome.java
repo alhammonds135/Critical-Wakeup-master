@@ -60,6 +60,7 @@ public class AlarmHome extends Activity {
             while (index <= numOfAlarms)
             {
                 TableRow tr = new TableRow(this);
+                tr.setWeightSum(10);
                 Alarm alarm;
                 for (int i = 0; i < 2; i++){
                     if (index <= numOfAlarms) { //Make sure we don't go out of bounds with the second call
@@ -97,14 +98,15 @@ public class AlarmHome extends Activity {
                                 break;
                         }
                         String s = alarm.getName() + "\n" +
-                                alarm.getHour() + ":" + mins + " " + AmPm + "\n" +
-                                "Critical Level:  " + criticalLevel;
+                                hour + ":" + mins + " " + AmPm + "\n" +
+                                "Level:  " + criticalLevel;
                         System.out.println("Alarm text is " + s);
                         button.setText(s);
-                        TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        lp.setMargins(0, 0, 10, 10);
-                        lp.weight = 50;
+                        TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        lp.setMargins(10, 10, 10, 10);
+                        lp.weight = 5;
                         button.setTag(index);
+                        button.setOnClickListener(alarmClicked);
                         button.setBackgroundResource(R.drawable.alarm_button_style); //Custom created style
                         button.setLayoutParams(lp);
                         tr.addView(button);
@@ -121,10 +123,14 @@ public class AlarmHome extends Activity {
             text.setText(s);
         }
     }
-    public void onClick(View v) {
-        int index = (int) v.getTag();
-        Intent i = new Intent(AlarmHome.this, AddAlarm.class);
-        i.putExtra("EDIT", index);
-        startActivity(i);
-    }
+
+    private View.OnClickListener alarmClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int index = (int) v.getTag();
+            Intent i = new Intent(AlarmHome.this, AddAlarm.class);
+            i.putExtra("EDIT", index);
+            startActivity(i);
+        }
+    };
 }

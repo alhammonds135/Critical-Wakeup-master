@@ -108,11 +108,4 @@ public class AddAlarm extends AppCompatActivity {
         finish();
     }
 
-   // public void make() {
-
-        //saveAlarm(newAlarm); //Save it
-    //}
-   /* public void saveAlarm(Alarm alarm){
-
-    }*/
 }
