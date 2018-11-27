@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.google.code.gson:gson:2.2.+'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
