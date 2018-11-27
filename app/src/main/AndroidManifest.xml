@@ -11,30 +11,24 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".AlarmPage"
-            android:label="Alarms">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label=""/>
         <activity
             android:name=".EditAlarm"
             android:label="Edit Alarm">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AlarmHome"
-            android:label="@string/title_activity_alarm_home" />
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".SoundService" />
         <service android:name=".AlarmService" />
 
-        <activity android:name=".AlarmActive"></activity>
+        <activity android:name=".AlarmActive"/>
     </application>
 
 </manifest>

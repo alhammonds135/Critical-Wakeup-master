@@ -50,31 +50,30 @@ public class AlarmPage extends AppCompatActivity {
 
         String dirName = "alarms";
         getDir(dirName,0);
+        //Get the number of alarms
+        int numOfAlarms = 4; //Number of alarms to be displayed
+        Button[] array = new Button[numOfAlarms]; //An array to be used to store the buttons created
+        if (numOfAlarms > 0){ //If there are some alarms to be shown
+            for (int i = 0; i < numOfAlarms; i++) {
+                Button btn = new Button(this);
+                btn.setText("ALARM NAME " + i + "\n" + i +":00AM\nHIGH\nSound1"); //TODO implement the actual pulling of data, instead of hardcoding
+                btn.setBackgroundResource(R.drawable.alarm_button_style); //This is a style I created. I'll add it below.
+                array[i] = btn; //add it to the array.
+            }
+        }
 
-//        //Get the number of alarms
-//        int numOfAlarms = 4; //Number of alarms to be displayed
-//        Button[] array = new Button[numOfAlarms]; //An array to be used to store the buttons created
-//        if (numOfAlarms > 0){ //If there are some alarms to be shown
-//            for (int i = 0; i < numOfAlarms; i++) {
-//                Button button = new Button(this);
-//                button.setText("ALARM NAME " + i + "\n" + i +":00AM\nHIGH\nSound1"); //TODO implement the actual pulling of data, instead of hardcoding
-//                button.setBackgroundResource(R.drawable.alarm_button_style); //This is a style I created. I'll add it below.
-//                array[i] = button; //add it to the array.
-//            }
-//        }
-//
-//        //Fill in the table
-//        TableLayout table = (TableLayout)findViewById(R.id.alarmSelect);
-//        for (int i = 0; i < numOfAlarms; i = i + 2) { //this creates rows and adds them to the table
-//            TableRow row = new TableRow(this.getApplicationContext());
-//            row.removeAllViews(); //Required by IDE...
-//            Button b1 = array[i]; //Add the first array
-//            row.addView(b1); //add the button
-//            if (array.length < (i+1)) { //if there is another button
-//                Button b2 = array[i + 1]; //add the second button on the row
-//                row.addView(b2);
-//            }
-//            table.addView(row); //add the row to the table
-//        }
+        //Fill in the table
+        TableLayout table = (TableLayout)findViewById(R.id.alarmSelect);
+        for (int i = 0; i < numOfAlarms; i = i + 2) { //this creates rows and adds them to the table
+            TableRow row = new TableRow(this.getApplicationContext());
+            row.removeAllViews(); //Required by IDE...
+            Button b1 = array[i]; //Add the first array
+            row.addView(b1); //add the button
+            if (array.length < (i+1)) { //if there is another button
+                Button b2 = array[i + 1]; //add the second button on the row
+                row.addView(b2);
+            }
+            table.addView(row); //add the row to the table
+        }
     }
 }

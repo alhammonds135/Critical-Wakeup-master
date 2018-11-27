@@ -1,5 +1,11 @@
 package com.markm.criticalwakeup;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -42,7 +48,22 @@ public class Alarm {
 
     @Override
     public String toString() {
-        return "It's running boyyyy";
+        return "It's running boyyyy"; //TODO what...
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getCritical() {
+        return critical;
+    }
 }
