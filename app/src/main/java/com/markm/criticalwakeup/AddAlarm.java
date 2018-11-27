@@ -3,7 +3,6 @@ package com.markm.criticalwakeup;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-public class EditAlarm extends AppCompatActivity {
+public class AddAlarm extends AppCompatActivity {
 
     private EditText aName;
     private TextView crit;
@@ -33,46 +32,39 @@ public class EditAlarm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_alarm);
 
+        final int index = getIntent().getIntExtra("EDIT", 1);
+        SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
+        String key = "Alarm"+index;
+        String json = prefs.getString(key, "");
+        Gson gson = new Gson();
+        Alarm alarm = gson.fromJson(json, Alarm.class);
         aName = findViewById(R.id.alarmName);
+        aName.setText(alarm.getName());
 
         crit = findViewById(R.id.level);
         crit.setText("Level:");
 
         timePicker = findViewById(R.id.timePicker);
+        timePicker.setHour(alarm.getHour());
+        timePicker.setMinute(alarm.getMinute());
+
 
         create = findViewById(R.id.create);
-        create.setText("Create Alarm");
+        create.setText("Save Alarm");
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hour = timePicker.getHour();
-                min = timePicker.getMinute();
-                alarmService = new Intent(getApplicationContext(), AlarmService.class);
-                alarmService.putExtra("hour", hour);
-                alarmService.putExtra("min", min);
-                alarmService.putExtra("crit", critVal);
-                //alarmService.putExtra("name", aName.getText().toString());
-                startService(alarmService);
-//                back = new Intent(EditAlarm.this, AlarmHome.class);
-//                back.putExtra("aName",aName.getText().toString());
-//                back.putExtra("time", (hour + ":" + min));
-//                back.putExtra("critical",crit.getText().toString());
-//                back();
                 Alarm newAlarm = new Alarm((int) (Math.random() * 1000), aName.getText().toString(),
                         timePicker.getHour(), timePicker.getMinute(), critVal);
-                Log.i("new alarm", newAlarm.toString());
+                Log.i("updated alarm", newAlarm.toString());
                 SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
-                int numOfalarms = prefs.getInt("numOfAlarms", 0);
                 SharedPreferences.Editor edit = prefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(newAlarm);
-                numOfalarms++; //Adding a new alarm, make the num go up
-                edit.putInt("numOfAlarms", numOfalarms);
-                String newName = "Alarm" + (numOfalarms);
+                String newName = "Alarm" + index;
                 edit.putString(newName, json);
-                System.out.println("NUMBER OF ALARMS AFTER ITERATING IS \n\n" + numOfalarms );
                 edit.apply();
-                Toast.makeText(EditAlarm.this, "Alarm Saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddAlarm.this, "Alarm Saved.", Toast.LENGTH_SHORT).show();
                 back();
             }
         });
@@ -109,6 +101,7 @@ public class EditAlarm extends AppCompatActivity {
             }
         });
 
+        radioGroup.check(alarm.getCritical());
     }
 
     public void back(){
