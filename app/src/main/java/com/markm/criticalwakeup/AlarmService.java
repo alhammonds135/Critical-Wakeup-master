@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.Calendar;
+import java.util.Random;
 
 
 public class AlarmService extends Service {
@@ -32,6 +33,7 @@ public class AlarmService extends Service {
     private IBinder binder = new AlarmServiceBinder();
 
     public int onStartCommand(Intent intent, int flags, int startId){
+        //make a linked list of all the alarms in the Gson
         hour = intent.getExtras().getInt("hour");
         min = intent.getExtras().getInt("min");
         critNum = intent.getExtras().getInt("crit");
@@ -93,15 +95,7 @@ public class AlarmService extends Service {
             else{
                 Log.i(Tag, "Less than a min");
                     isOn = false;
-                    sound = new Intent(getApplicationContext(), SoundService.class);
-                    sound.putExtra("crit", critNum);
-                    startService(sound);
-                    soundOn = true;
-                    Intent activeAlarm = new Intent(getApplicationContext(), AlarmActive.class);
-                    activeAlarm.putExtra("hour", hour);
-                    activeAlarm.putExtra("Min", min);
-                    activeAlarm.putExtra("name", alarmName);
-                    startActivity(activeAlarm);
+                    pickPuzzle();
             }
         }
     }
@@ -111,7 +105,36 @@ public class AlarmService extends Service {
     }
 
     public void pickPuzzle(){
+        sound = new Intent(getApplicationContext(), SoundService.class);
+        sound.putExtra("crit", critNum);
+        startService(sound);
+        soundOn = true;
+        Random generator = new Random();
+        int number = generator.nextInt(2) + 1;
+        // The '2' is the number of activities
 
+        Class activity = null;
+
+        // Here, we are checking to see what the output of the random was
+        switch(number) {
+            case 1:
+                //send Math Puzzle
+                //activity = ActivityOne.class;
+                break;
+            case 2:
+                //Send Barcode
+                //activity = ActivityTwo.class;
+                break;
+            default:
+                //defaults to math
+                //activity = ActivityTree.class;
+                break;
+        }
+        Intent activeAlarm = new Intent(getApplicationContext(), AlarmActive.class);
+        activeAlarm.putExtra("hour", hour);
+        activeAlarm.putExtra("Min", min);
+        activeAlarm.putExtra("name", alarmName);
+        startActivity(activeAlarm);
     }
 
     @Override
