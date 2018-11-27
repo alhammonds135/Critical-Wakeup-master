@@ -53,19 +53,6 @@ public class AlarmService extends Service {
         }
         isOn = true;
 
-        ArrayList<Alarm> alarmsList = new ArrayList<Alarm>();
-        SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
-        int numOfAlarms = prefs.getInt("numOfAlarms", 0);
-        Gson gson = new Gson();
-        String json = "";
-        Alarm alarm;
-        for (int i = 1; i < numOfAlarms; i++){
-            String key = "Alarm"+i;
-            json = prefs.getString(key, "");
-            alarm = gson.fromJson(json, Alarm.class);
-            alarmsList.add(alarm);
-        }
-
         new Thread(new Runnable() {
             @Override
             public void run() {

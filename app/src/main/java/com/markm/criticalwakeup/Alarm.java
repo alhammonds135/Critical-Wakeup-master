@@ -46,9 +46,6 @@ public class Alarm {
         }
     }
 
-    public int getHour() {
-        return hour;
-    }
 
     @Override
     public String toString() {
