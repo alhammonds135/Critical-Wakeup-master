@@ -68,6 +68,7 @@ public class AlarmService extends Service {
             for (int i = 0; i < alarmsList.size(); i++) {
                 cal = Calendar.getInstance();
                 hour = alarmsList.get(i).getHour();
+                min = alarmsList.get(i).getMinute();
                 int hourLeft = hour - cal.get(Calendar.HOUR_OF_DAY);
                 if (hourLeft < 0)
                     hourLeft = hourLeft * -1;

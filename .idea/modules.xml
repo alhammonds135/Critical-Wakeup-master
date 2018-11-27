@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Critical-Wakeup-master.iml" filepath="$PROJECT_DIR$/Critical-Wakeup-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zxing_embedded/zxing_embedded.iml" filepath="$PROJECT_DIR$/zxing_embedded/zxing_embedded.iml" />
     </modules>
   </component>
 </project>
