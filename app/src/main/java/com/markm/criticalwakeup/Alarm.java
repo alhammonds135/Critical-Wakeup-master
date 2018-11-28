@@ -46,12 +46,6 @@ public class Alarm {
         }
     }
 
-
-    @Override
-    public String toString() {
-        return "It's running boyyyy"; //TODO what...
-    }
-
     public String getName() {
         return name;
     }
@@ -62,5 +56,20 @@ public class Alarm {
 
     public int getCritical() {
         return critical;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    @Override
+    public String toString() {
+        return "Alarm{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", hour=" + hour +
+                ", minute=" + minute +
+                ", critical=" + critical +
+                '}';
     }
 }

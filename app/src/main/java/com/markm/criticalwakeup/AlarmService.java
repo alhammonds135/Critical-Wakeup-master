@@ -39,19 +39,24 @@ public class AlarmService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId){
         //make a linked list of all the alarms in the Gson
+        Log.i(Tag, "Alarm Service Started");
         alarmsList = new ArrayList<Alarm>();
         SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
         int numOfAlarms = prefs.getInt("numOfAlarms", 0);
+        Log.i(Tag, "THE NUMBER OF ALARMS IS \n\n" + numOfAlarms);
         Gson gson = new Gson();
         String json = "";
         Alarm alarm;
-        for (int i = 1; i < numOfAlarms; i++){
+        for (int i = 1; i <= numOfAlarms; i++){
+            Log.i(Tag,"adding alarm to list");
             String key = "Alarm"+i;
             json = prefs.getString(key, "");
             alarm = gson.fromJson(json, Alarm.class);
             alarmsList.add(alarm);
         }
         isOn = true;
+
+        System.out.println("Before new thread");
 
         new Thread(new Runnable() {
             @Override
@@ -65,7 +70,9 @@ public class AlarmService extends Service {
 
     public void startService(){
         while(isOn){
+            //System.out.println("in while loop");
             for (int i = 0; i < alarmsList.size(); i++) {
+                //System.out.println("in for loop");
                 cal = Calendar.getInstance();
                 hour = alarmsList.get(i).getHour();
                 min = alarmsList.get(i).getMinute();
@@ -117,8 +124,8 @@ public class AlarmService extends Service {
         // Here, we are checking to see what the output of the random was
         switch(number) {
             case 1:
-                activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
-                activeAlarm.putExtra("difficulty", 1);
+                //activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
+                //activeAlarm.putExtra("difficulty", 1);
                 break;
             case 2:
                 activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);

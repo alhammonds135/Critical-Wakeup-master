@@ -21,7 +21,7 @@ public class EditAlarm extends AppCompatActivity {
 
     private EditText aName;
     private TextView crit;
-    private Button create, cancel;
+    private Button create, cancel, delete;
     private RadioButton high, med, low;
     private int hour, min, critVal;
     private TimePicker timePicker;
@@ -57,7 +57,7 @@ public class EditAlarm extends AppCompatActivity {
             public void onClick(View v) {
                 Alarm updatedAlarm = new Alarm((int) (Math.random() * 1000), aName.getText().toString(),
                         timePicker.getHour(), timePicker.getMinute(), critVal);
-                Log.i("updated alarm", updatedAlarm.toString());
+                Log.i("edit alarm", updatedAlarm.toString());
                 SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
                 SharedPreferences.Editor edit = prefs.edit();
                 Gson gson = new Gson();
@@ -78,6 +78,25 @@ public class EditAlarm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 back();
+            }
+        });
+
+        delete = findViewById(R.id.deleteButton);
+        delete.setText("Delete");
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
+                SharedPreferences.Editor edit = prefs.edit();
+                int numOfAlarms = prefs.getInt("numOfAlarms", 0);
+                String key = "Alarm" + index;
+                edit.remove(key);
+                edit.putInt("numOfAlarms", (numOfAlarms-1));
+                edit.apply();
+                Toast.makeText(EditAlarm.this, "Alarm deleted.", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(EditAlarm.this, AlarmHome.class);
+                startActivity(i);
+                finish();
             }
         });
 

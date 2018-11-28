@@ -1,5 +1,6 @@
 package com.markm.criticalwakeup;
 
+import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -35,7 +37,7 @@ public class AlarmHome extends Activity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AlarmHome.this, EditAlarm.class));
+                startActivity(new Intent(AlarmHome.this, AddAlarm.class));
             }
         });
     }
@@ -54,7 +56,9 @@ public class AlarmHome extends Activity {
         SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
         numOfAlarms = prefs.getInt("numOfAlarms", 0);
         System.out.println("THE NUMBER OF ALARMS IS \n\n" + numOfAlarms);
+        Intent startAlarms = new Intent(this, AlarmService.class);
         if (!(numOfAlarms == 0)){
+            startService(startAlarms);
             int index = 1;
             table.setPadding(15, 15, 15, 15);
             while (index <= numOfAlarms)
@@ -119,6 +123,7 @@ public class AlarmHome extends Activity {
             text.setVisibility(View.GONE);
         }
         else {
+            stopService(startAlarms);
             String s = "There's nothing here!\nClick the alarm icon to add a new alarm!";
             text.setText(s);
         }
@@ -128,7 +133,7 @@ public class AlarmHome extends Activity {
         @Override
         public void onClick(View v) {
             int index = (int) v.getTag();
-            Intent i = new Intent(AlarmHome.this, AddAlarm.class);
+            Intent i = new Intent(AlarmHome.this, EditAlarm.class);
             i.putExtra("EDIT", index);
             startActivity(i);
         }

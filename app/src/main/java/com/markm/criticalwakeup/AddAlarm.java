@@ -30,7 +30,7 @@ public class AddAlarm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_alarm);
+        setContentView(R.layout.activity_add_alarm);
 
         final int index = getIntent().getIntExtra("EDIT", 1);
         SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
@@ -39,15 +39,17 @@ public class AddAlarm extends AppCompatActivity {
         Gson gson = new Gson();
         Alarm alarm = gson.fromJson(json, Alarm.class);
         aName = findViewById(R.id.alarmName);
-        aName.setText(alarm.getName());
+        //aName.setText(alarm.getName());
 
         crit = findViewById(R.id.level);
         crit.setText("Level:");
 
         timePicker = findViewById(R.id.timePicker);
-        timePicker.setHour(alarm.getHour());
+        /**timePicker.setHour(alarm.getHour());
         timePicker.setMinute(alarm.getMinute());
 
+        for making a new alarm there is nothing to set these to so it crashes
+        **/
 
         create = findViewById(R.id.create);
         create.setText("Save Alarm");
@@ -56,13 +58,15 @@ public class AddAlarm extends AppCompatActivity {
             public void onClick(View v) {
                 Alarm newAlarm = new Alarm((int) (Math.random() * 1000), aName.getText().toString(),
                         timePicker.getHour(), timePicker.getMinute(), critVal);
-                Log.i("updated alarm", newAlarm.toString());
+                Log.i("add alarm", newAlarm.toString());
                 SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
+                int numOfAlarms = prefs.getInt("numOfAlarms", 0);
                 SharedPreferences.Editor edit = prefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(newAlarm);
                 String newName = "Alarm" + index;
                 edit.putString(newName, json);
+                edit.putInt("numOfAlarms", (numOfAlarms+1));
                 edit.apply();
                 Toast.makeText(AddAlarm.this, "Alarm Saved.", Toast.LENGTH_SHORT).show();
                 back();
@@ -101,7 +105,7 @@ public class AddAlarm extends AppCompatActivity {
             }
         });
 
-        radioGroup.check(alarm.getCritical());
+        //radioGroup.check(alarm.getCritical());
     }
 
     public void back(){
