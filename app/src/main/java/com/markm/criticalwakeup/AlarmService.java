@@ -112,22 +112,22 @@ public class AlarmService extends Service {
         // The '2' is the number of activities
 
         Class activity = null;
+        Intent activeAlarm = new Intent();
 
         // Here, we are checking to see what the output of the random was
         switch(number) {
             case 1:
-                //send Math Puzzle
-                //activity = ActivityOne.class;
+                activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
+                activeAlarm.putExtra("difficulty", 1);
                 break;
             case 2:
-                activity = BarcodeActivity.class;
+                activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
                 break;
             default:
                 //defaults to math
-                activity = BarcodeActivity.class;
+                activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
                 break;
         }
-        Intent activeAlarm = new Intent(getApplicationContext(), activity);
         activeAlarm.putExtra("hour", hour);
         activeAlarm.putExtra("Min", min);
         activeAlarm.putExtra("name", alarmName);

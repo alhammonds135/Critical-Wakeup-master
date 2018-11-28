@@ -1,5 +1,6 @@
 package com.markm.criticalwakeup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,7 +30,9 @@ public class MathPuzzle extends AppCompatActivity {
         sol = findViewById(R.id.solution);
         chk = findViewById(R.id.check);
 
-        difLevel = 1;
+        Intent intent = getIntent();
+
+        difLevel = intent.getIntExtra("difficulty", -1);
 
         if (difLevel == 0) {
             i = r.nextInt(9);
@@ -58,6 +61,10 @@ public class MathPuzzle extends AppCompatActivity {
 
                 if(total==inSol){
                     Toast.makeText(MathPuzzle.this, "Correct", Toast.LENGTH_SHORT).show();
+                    Intent sound = new Intent(getApplicationContext(), SoundService.class);
+                    stopService(sound);
+                    Intent home = new Intent(getApplicationContext(), AlarmHome.class);
+                    startActivity(home);
                 }
                 else{
                     Toast.makeText(MathPuzzle.this, "Wrong", Toast.LENGTH_SHORT).show();
