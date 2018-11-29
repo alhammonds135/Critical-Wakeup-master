@@ -3,6 +3,7 @@ package com.markm.criticalwakeup;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
@@ -106,6 +107,7 @@ public class AlarmHome extends Activity {
                                 "Level:  " + criticalLevel;
                         System.out.println("Alarm text is " + s);
                         button.setText(s);
+                        button.setTextColor(Color.parseColor("#FFFFFF"));
                         TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         lp.setMargins(10, 10, 10, 10);
                         lp.weight = 5;
