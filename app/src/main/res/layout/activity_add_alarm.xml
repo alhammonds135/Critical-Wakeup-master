@@ -7,249 +7,261 @@
     tools:context=".AddAlarm"
     tools:layout_editor_absoluteY="25dp">
 
-<TimePicker
-    android:id="@+id/timePicker"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="4dp"
-    android:headerBackground="@color/colorPrimaryDark"
-    android:numbersSelectorColor="@color/colorPrimary"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/alarmName"/>
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:headerBackground="@color/colorPrimaryDark"
+        android:numbersSelectorColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarmName" />
 
-<EditText
-    android:id="@+id/alarmName"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:ems="10"
-    android:hint="Name Alarm"
-    android:inputType="textPersonName"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.503"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/alarmName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Name Alarm"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<TextView
-    android:id="@+id/level"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="28dp"
-    android:layout_marginStart="68dp"
-    android:layout_marginTop="16dp"
-    android:text="Critical Level"
-    app:layout_constraintEnd_toStartOf="@+id/radioGroup"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="16dp"
+        android:text="Critical Level"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
 
     <Button
         android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.817"
         app:layout_constraintStart_toEndOf="@+id/cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sunCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/wedCheckBox" />
 
-<RadioGroup
-    android:id="@+id/radioGroup"
-    android:layout_width="152dp"
-    android:layout_height="78dp"
-    android:layout_marginEnd="30dp"
-    android:layout_marginStart="8dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.907"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/timePicker">
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="152dp"
+        android:layout_height="78dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker">
 
-    <RadioButton
-        android:id="@+id/high"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="RadioButton" />
+        <RadioButton
+            android:id="@+id/high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
 
-    <RadioButton
-        android:id="@+id/medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="RadioButton" />
+        <RadioButton
+            android:id="@+id/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
 
-    <RadioButton
-        android:id="@+id/low"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="RadioButton" />
-</RadioGroup>
+        <RadioButton
+            android:id="@+id/low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="16dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/create"
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sunCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/wedCheckBox" />
 
     <CheckBox
         android:id="@+id/sunCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/monCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/sunTextView"
+        app:layout_constraintStart_toStartOf="@+id/sunTextView"
         app:layout_constraintTop_toBottomOf="@+id/sunTextView" />
 
     <CheckBox
         android:id="@+id/monCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/sunCheckBox"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tueCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/monTextView"
+        app:layout_constraintStart_toStartOf="@+id/monTextView"
         app:layout_constraintTop_toBottomOf="@+id/monTextView" />
 
     <CheckBox
         android:id="@+id/tueCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/monCheckBox"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/wedCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/tueTextView"
+        app:layout_constraintStart_toStartOf="@+id/tueTextView"
         app:layout_constraintTop_toBottomOf="@+id/tueTextView" />
 
     <CheckBox
         android:id="@+id/wedCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/tueCheckBox"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wedTextView" />
 
     <CheckBox
         android:id="@+id/thurCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/wedCheckBox"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/wedCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/thuTextView"
+        app:layout_constraintStart_toStartOf="@+id/thuTextView"
         app:layout_constraintTop_toBottomOf="@+id/thuTextView" />
 
     <CheckBox
         android:id="@+id/friCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/thurCheckBox"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/thurCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/friTextView"
+        app:layout_constraintStart_toStartOf="@+id/friTextView"
         app:layout_constraintTop_toBottomOf="@+id/friTextView" />
 
     <CheckBox
         android:id="@+id/satCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/friCheckBox"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/friCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/satTextView"
+        app:layout_constraintStart_toStartOf="@+id/satTextView"
         app:layout_constraintTop_toBottomOf="@+id/satTextView" />
 
     <TextView
         android:id="@+id/sunTextView"
-        android:layout_width="31dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="@string/sun"
+        app:layout_constraintEnd_toStartOf="@+id/monTextView"
+        app:layout_constraintTop_toTopOf="@+id/monTextView" />
+
+    <TextView
+        android:id="@+id/monTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@string/mon"
+        app:layout_constraintEnd_toStartOf="@+id/tueTextView"
+        app:layout_constraintTop_toTopOf="@+id/tueTextView" />
+
+    <TextView
+        android:id="@+id/tueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@string/tue"
+        app:layout_constraintEnd_toStartOf="@+id/wedTextView"
+        app:layout_constraintTop_toTopOf="@+id/wedTextView" />
+
+    <TextView
+        android:id="@+id/wedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/wed"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
-        android:id="@+id/monTextView"
-        android:layout_width="35dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/mon"
-        app:layout_constraintStart_toEndOf="@+id/sunTextView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <TextView
-        android:id="@+id/tueTextView"
-        android:layout_width="31dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/tue"
-        app:layout_constraintStart_toEndOf="@+id/monTextView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <TextView
-        android:id="@+id/wedTextView"
-        android:layout_width="31dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/wed"
-        app:layout_constraintStart_toEndOf="@+id/tueTextView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <TextView
         android:id="@+id/thuTextView"
-        android:layout_width="31dp"
-        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/thu"
         app:layout_constraintStart_toEndOf="@+id/wedTextView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toTopOf="@+id/wedTextView" />
 
     <TextView
         android:id="@+id/friTextView"
-        android:layout_width="31dp"
-        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/fri"
         app:layout_constraintStart_toEndOf="@+id/thuTextView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toTopOf="@+id/thuTextView" />
 
     <TextView
         android:id="@+id/satTextView"
-        android:layout_width="31dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/sat"
         app:layout_constraintStart_toEndOf="@+id/friTextView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toTopOf="@+id/friTextView" />
 
 </android.support.constraint.ConstraintLayout>
