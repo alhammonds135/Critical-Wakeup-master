@@ -41,6 +41,7 @@ public class EditAlarm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_alarm);
 
+        days = new boolean[7];
         final int index = getIntent().getIntExtra("EDIT", 1);
         SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
         String key = "Alarm"+index;
@@ -174,23 +175,44 @@ public class EditAlarm extends AppCompatActivity {
             low.setChecked(true);
         }
 
-        sun = findViewById(R.id.sunCheckBox);
-        mon = findViewById(R.id.monCheckBox);
-        tue = findViewById(R.id.tueCheckBox);
-        wed = findViewById(R.id.wedCheckBox);
-        thu = findViewById(R.id.thuCheckBox);
-        fri = findViewById(R.id.friCheckBox);
-        sat = findViewById(R.id.satCheckBox);
+        sun = findViewById(R.id.sunCheckBox2);
+        mon = findViewById(R.id.monCheckBox2);
+        tue = findViewById(R.id.tueCheckBox2);
+        wed = findViewById(R.id.wedCheckBox2);
+        thu = findViewById(R.id.thuCheckBox2);
+        fri = findViewById(R.id.friCheckBox2);
+        sat = findViewById(R.id.satCheckBox2);
 
-        /**currentDays = alarm.getDays();
-        sun.setChecked(currentDays[0]);
-        mon.setChecked(currentDays[1]);
-        tue.setChecked(currentDays[2]);
-        wed.setChecked(currentDays[3]);
-        thu.setChecked(currentDays[4]);
-        fri.setChecked(currentDays[5]);
-        sat.setChecked(currentDays[6]);
-        **/
+
+        currentDays = alarm.getDays();
+        if (currentDays[0]) {
+            sun.setChecked(currentDays[0]);
+            days[0] = true;
+        }
+        if (currentDays[1]) {
+            mon.setChecked(currentDays[1]);
+            days[1] = true;
+        }
+        if (currentDays[2]) {
+            tue.setChecked(currentDays[2]);
+            days[2] = true;
+        }
+        if (currentDays[3]) {
+            wed.setChecked(currentDays[3]);
+            days[3] = true;
+        }
+        if (currentDays[4]) {
+            thu.setChecked(currentDays[4]);
+            days[4] = true;
+        }
+        if (currentDays[5]) {
+            fri.setChecked(currentDays[5]);
+            days[5] = true;
+        }
+        if (currentDays[6]) {
+            sat.setChecked(currentDays[6]);
+            days[6] = true;
+        }
 
         sun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
