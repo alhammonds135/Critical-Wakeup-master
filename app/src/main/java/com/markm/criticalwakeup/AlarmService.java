@@ -73,33 +73,34 @@ public class AlarmService extends Service {
             //System.out.println("in while loop");
             for (int i = 0; i < alarmsList.size(); i++) {
                 //System.out.println("in for loop");
+                Alarm currentAlarm = alarmsList.get(i);
                 cal = Calendar.getInstance();
-                hour = alarmsList.get(i).getHour();
-                min = alarmsList.get(i).getMinute();
+                hour = currentAlarm.getHour();
+                min = currentAlarm.getMinute();
                 int hourLeft = hour - cal.get(Calendar.HOUR_OF_DAY);
                 if (hourLeft < 0)
                     hourLeft = hourLeft * -1;
-                Log.i(Tag, "Hour: " + hour + " Calendar Hour: " + cal.get(Calendar.HOUR_OF_DAY) + " Hour Left: " + hourLeft);
+                //Log.i(Tag, "Hour: " + hour + " Calendar Hour: " + cal.get(Calendar.HOUR_OF_DAY) + " Hour Left: " + hourLeft);
                 int minLeft = min - cal.get(Calendar.MINUTE);
-                Log.i(Tag, "Min: " + min + " Calendar Min: " + cal.get(Calendar.MINUTE) + " Min Left: " + minLeft);
+                //Log.i(Tag, "Min: " + min + " Calendar Min: " + cal.get(Calendar.MINUTE) + " Min Left: " + minLeft);
 
                 //find a way not to have to check everything
                 if (hourLeft > 0) {
-                    Log.i(Tag, "More than an hour");
+                    //Log.i(Tag, "More than an hour");
                 }
                 else if (minLeft > 30) {
-                    Log.i(Tag, "More than 30 min");
+                    //Log.i(Tag, "More than 30 min");
                 }
                 else if (minLeft > 5) {
-                    Log.i(Tag, "More than 5 min");
+                    //Log.i(Tag, "More than 5 min");
                 }
                 else if (minLeft >= 1) {
-                    Log.i(Tag, "More than 1 min");
+                    //Log.i(Tag, "More than 1 min");
                 }
-                else {
+                else if (currentAlarm.isOn()){
                     Log.i(Tag, "Less than a min");
-                    isOn = false;
-                    pickPuzzle(i);
+                    currentAlarm.turnOff();
+                    pickPuzzle();
                 }
             }
         }
@@ -109,23 +110,21 @@ public class AlarmService extends Service {
         isOn = false;
     }
 
-    public void pickPuzzle(int i){
+    public void pickPuzzle(){
         sound = new Intent(getApplicationContext(), SoundService.class);
         sound.putExtra("crit", critNum);
         startService(sound);
         soundOn = true;
         Random generator = new Random();
         int number = generator.nextInt(2) + 1;
-        // The '2' is the number of activities
 
-        Class activity = null;
         Intent activeAlarm = new Intent();
 
         // Here, we are checking to see what the output of the random was
         switch(number) {
             case 1:
-                //activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
-                //activeAlarm.putExtra("difficulty", 1);
+                activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
+                activeAlarm.putExtra("difficulty", 1);
                 break;
             case 2:
                 activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);

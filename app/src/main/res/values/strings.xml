@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">Critical Wakeup</string>
     <string name="title_activity_alarm_home">AlarmHome</string>
+    <string name="default_alarm">Alarm</string>
 
     <string name="title_activity_alarm_active">AlarmActive</string>
     <string name="close_button">CLOSE</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
+    <string name="sun">SUN</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
 </resources>

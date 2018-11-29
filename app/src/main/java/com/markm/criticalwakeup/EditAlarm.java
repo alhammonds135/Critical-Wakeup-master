@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -27,6 +28,8 @@ public class EditAlarm extends AppCompatActivity {
     private TimePicker timePicker;
     private Intent alarmService;
     private RadioGroup radioGroup;
+    private Switch onOff;
+    private boolean on;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,34 @@ public class EditAlarm extends AppCompatActivity {
         String key = "Alarm"+index;
         String json = prefs.getString(key, "");
         Gson gson = new Gson();
-        Alarm alarm = gson.fromJson(json, Alarm.class);
+        final Alarm alarm = gson.fromJson(json, Alarm.class);
+
+        onOff = findViewById(R.id.onOffSwitch);
+        //onOff.setTextOff("Off");
+        //onOff.setTextOn("On");
+        if(alarm.isOn()) {
+            on = true;
+            onOff.setChecked(true);
+            onOff.setText("On");
+        }
+        else {
+            on = false;
+            onOff.setChecked(false);
+            onOff.setText("Off");
+        }
+        onOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!onOff.isChecked()){
+                     on = false;
+                     onOff.setText("Off");
+                }
+                else {
+                    on = true;
+                    onOff.setText("On");
+                }
+            }
+        });
 
         aName = findViewById(R.id.alarmName);
         aName.setText(alarm.getName());
@@ -57,6 +87,12 @@ public class EditAlarm extends AppCompatActivity {
             public void onClick(View v) {
                 Alarm updatedAlarm = new Alarm((int) (Math.random() * 1000), aName.getText().toString(),
                         timePicker.getHour(), timePicker.getMinute(), critVal);
+                if(on){
+                    updatedAlarm.turnOn();
+                }
+                else{
+                    updatedAlarm.turnOff();
+                }
                 Log.i("edit alarm", updatedAlarm.toString());
                 SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
                 SharedPreferences.Editor edit = prefs.edit();

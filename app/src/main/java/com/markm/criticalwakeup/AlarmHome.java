@@ -111,7 +111,11 @@ public class AlarmHome extends Activity {
                         lp.weight = 5;
                         button.setTag(index);
                         button.setOnClickListener(alarmClicked);
-                        button.setBackgroundResource(R.drawable.alarm_button_style); //Custom created style
+                        if(alarm.isOn())
+                            button.setBackgroundResource(R.drawable.alarm_button_on_style);//Custom created style
+                        else
+                            button.setBackgroundResource(R.drawable.alarm_button_off_style);//Custom created style
+
                         button.setLayoutParams(lp);
                         tr.addView(button);
                         System.out.println("The Alarm Button was added");

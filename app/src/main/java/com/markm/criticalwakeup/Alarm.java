@@ -18,6 +18,8 @@ public class Alarm {
     private int hour;
     private int minute;
     private int critical;
+    private boolean on;
+    private boolean[] days;
 
     public Alarm(int id, String name, int hour, int minute, int critical) {
 
@@ -26,6 +28,8 @@ public class Alarm {
         this.hour = hour;
         this.minute = minute;
         this.critical = critical;
+        this.on = true;
+        this.days = new boolean[7];
     }
 
     public void saveAlarm() {
@@ -60,6 +64,22 @@ public class Alarm {
 
     public int getHour() {
         return hour;
+    }
+
+    public boolean isOn() {
+        return on;
+    }
+
+    public void turnOff(){
+        this.on = false;
+    }
+
+    public void turnOn(){
+        this.on = true;
+    }
+
+    public void setDays(boolean[] days) {
+        this.days = days;
     }
 
     @Override

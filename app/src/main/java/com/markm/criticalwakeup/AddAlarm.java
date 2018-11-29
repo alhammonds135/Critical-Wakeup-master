@@ -61,12 +61,13 @@ public class AddAlarm extends AppCompatActivity {
                 Log.i("add alarm", newAlarm.toString());
                 SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
                 int numOfAlarms = prefs.getInt("numOfAlarms", 0);
+                numOfAlarms++;
                 SharedPreferences.Editor edit = prefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(newAlarm);
-                String newName = "Alarm" + index;
+                String newName = "Alarm" + numOfAlarms;
                 edit.putString(newName, json);
-                edit.putInt("numOfAlarms", (numOfAlarms+1));
+                edit.putInt("numOfAlarms", (numOfAlarms));
                 edit.apply();
                 Toast.makeText(AddAlarm.this, "Alarm Saved.", Toast.LENGTH_SHORT).show();
                 back();
