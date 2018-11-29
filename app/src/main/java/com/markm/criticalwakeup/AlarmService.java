@@ -74,6 +74,7 @@ public class AlarmService extends Service {
             for (int i = 0; i < alarmsList.size(); i++) {
                 //System.out.println("in for loop");
                 Alarm currentAlarm = alarmsList.get(i);
+                //Log.i("alarm service", currentAlarm.toString());
                 critNum = currentAlarm.getCritical();
                 cal = Calendar.getInstance();
                 hour = currentAlarm.getHour();
@@ -98,10 +99,15 @@ public class AlarmService extends Service {
                 else if (minLeft >= 1) {
                     //Log.i(Tag, "More than 1 min");
                 }
-                else if (currentAlarm.isOn()){
-                    Log.i(Tag, "Less than a min");
-                    alarmsList.get(i).turnOff();
-                    stopAlarm(currentAlarm);
+                else if ((currentAlarm.getAlarmDay() == cal.get(Calendar.DAY_OF_WEEK))&& currentAlarm.isOn() && minLeft == 0) {
+                    Log.i(Tag, "\n\nMin: " + min + " Calendar Min: " + cal.get(Calendar.MINUTE) + " Min Left: " + minLeft);
+                    Log.i(Tag, "Less than a min\n\n");
+                    if (turnOff(currentAlarm)){
+                        alarmsList.get(i).turnOff();
+                        stopAlarm(currentAlarm);
+                    }
+                    else
+                        addTime(currentAlarm);
                     pickPuzzle();
                 }
             }
@@ -110,6 +116,51 @@ public class AlarmService extends Service {
 
     public void stopService(){
         isOn = false;
+    }
+
+    public boolean turnOff(Alarm alarm){
+        //System.out.println("In turnOff");
+        boolean days[] = alarm.getDays();
+        for(int i = 0; i < 7; i++){
+            if (days[i])
+                return false;
+        }
+        return true;
+    }
+
+    public void addTime(Alarm alarm){
+        //System.out.println("In addTime");
+        boolean arr[] = new boolean[7];
+        boolean days[] = alarm.getDays();
+        int currentDay = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        int tempCD = currentDay;
+        for(int i = 0; i < 7; i++) {
+            //System.out.println("for loop");
+            arr[i] = days[tempCD%7];
+            tempCD++;
+        }
+
+        boolean lookingForNextDay = true;
+        int count = 1;
+        while(lookingForNextDay){
+            //System.out.println("while loop");
+            if(arr[count%7]){
+                lookingForNextDay = false;
+            }
+            count++;
+        }
+
+        int newAlarmDay = (currentDay + count)%7 ;
+        alarm.setAlarmDay(newAlarmDay);
+        Log.i("alarm service", alarm.toString());
+        SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(alarm);
+        String key = "Alarm" + alarm.getId();
+        edit.putString(key, json);
+        edit.apply();
+
     }
 
     public void stopAlarm(Alarm alarm){
@@ -135,7 +186,7 @@ public class AlarmService extends Service {
         Intent activeAlarm = new Intent();
 
         // Here, we are checking to see what the output of the random was
-        switch(3) {
+        switch(1) {
             case 1:
                 activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
                 activeAlarm.putExtra("difficulty", 1);

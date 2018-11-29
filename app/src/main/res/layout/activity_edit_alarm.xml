@@ -175,7 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/wedTextView" />
 
     <CheckBox
-        android:id="@+id/thurCheckBox"
+        android:id="@+id/thuCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
@@ -192,7 +192,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/thurCheckBox"
+        app:layout_constraintBottom_toBottomOf="@+id/thuCheckBox"
         app:layout_constraintEnd_toEndOf="@+id/friTextView"
         app:layout_constraintStart_toStartOf="@+id/friTextView"
         app:layout_constraintTop_toBottomOf="@+id/friTextView" />

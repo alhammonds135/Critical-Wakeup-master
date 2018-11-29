@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,6 +32,8 @@ public class EditAlarm extends AppCompatActivity {
     private RadioGroup radioGroup;
     private Switch onOff;
     private boolean on;
+    private CheckBox sun, mon, tue, wed, thu, fri, sat;
+    private boolean[] days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,7 @@ public class EditAlarm extends AppCompatActivity {
                 else{
                     updatedAlarm.turnOff();
                 }
+                updatedAlarm.setDays(days);
                 Log.i("edit alarm", updatedAlarm.toString());
                 SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
                 SharedPreferences.Editor edit = prefs.edit();
@@ -168,6 +173,84 @@ public class EditAlarm extends AppCompatActivity {
         else {
             low.setChecked(true);
         }
+
+        sun = findViewById(R.id.sunCheckBox);
+        mon = findViewById(R.id.monCheckBox);
+        tue = findViewById(R.id.tueCheckBox);
+        wed = findViewById(R.id.wedCheckBox);
+        thu = findViewById(R.id.thuCheckBox);
+        fri = findViewById(R.id.friCheckBox);
+        sat = findViewById(R.id.satCheckBox);
+
+        sun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[0] = true;
+                else
+                    days[0] = false;
+            }
+        });
+
+        mon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[1] = true;
+                else
+                    days[1] = false;
+            }
+        });
+
+        tue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[2] = true;
+                else
+                    days[2] = false;
+            }
+        });
+
+        wed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[3] = true;
+                else
+                    days[3] = false;
+            }
+        });
+
+        thu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[4] = true;
+                else
+                    days[4] = false;
+            }
+        });
+
+        fri.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[5] = true;
+                else
+                    days[5] = false;
+            }
+        });
+
+        sat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[6] = true;
+                else
+                    days[6] = false;
+            }
+        });
     }
 
     public void back(){

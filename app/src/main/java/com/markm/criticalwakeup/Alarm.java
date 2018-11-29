@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Alarm {
@@ -20,6 +21,7 @@ public class Alarm {
     private int critical;
     private boolean on;
     private boolean[] days;
+    private int alarmDay;
 
     public Alarm(int id, String name, int hour, int minute, int critical) {
 
@@ -30,6 +32,8 @@ public class Alarm {
         this.critical = critical;
         this.on = true;
         this.days = new boolean[7];
+        Calendar cal = Calendar.getInstance();
+        this.alarmDay = cal.get(Calendar.DAY_OF_WEEK);
     }
 
     public void saveAlarm() {
@@ -48,6 +52,18 @@ public class Alarm {
         while(scanner.hasNextLine()) {
 
         }
+    }
+
+    public boolean[] getDays() {
+        return days;
+    }
+
+    public int getAlarmDay() {
+        return alarmDay;
+    }
+
+    public void setAlarmDay(int alarmDay) {
+        this.alarmDay = alarmDay;
     }
 
     public int getId() {
@@ -94,6 +110,7 @@ public class Alarm {
                 ", hour=" + hour +
                 ", minute=" + minute +
                 ", critical=" + critical +
+                ", alarm day=" + alarmDay +
                 '}';
     }
 }

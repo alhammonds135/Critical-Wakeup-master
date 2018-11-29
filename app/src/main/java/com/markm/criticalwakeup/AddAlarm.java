@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,12 +28,15 @@ public class AddAlarm extends AppCompatActivity {
     private TimePicker timePicker;
     private Intent alarmService;
     private RadioGroup radioGroup;
+    private CheckBox sun, mon, tue, wed, thu, fri, sat;
+    private boolean[] days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_alarm);
 
+        days = new boolean[7];
         final int index = getIntent().getIntExtra("EDIT", 1);
         SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
         String key = "Alarm"+index;
@@ -39,17 +44,11 @@ public class AddAlarm extends AppCompatActivity {
         Gson gson = new Gson();
         Alarm alarm = gson.fromJson(json, Alarm.class);
         aName = findViewById(R.id.alarmName);
-        //aName.setText(alarm.getName());
 
         crit = findViewById(R.id.level);
         crit.setText("Level:");
 
         timePicker = findViewById(R.id.timePicker);
-        /**timePicker.setHour(alarm.getHour());
-        timePicker.setMinute(alarm.getMinute());
-
-        for making a new alarm there is nothing to set these to so it crashes
-        **/
 
         create = findViewById(R.id.create);
         create.setText("Save Alarm");
@@ -61,6 +60,7 @@ public class AddAlarm extends AppCompatActivity {
                 numOfAlarms++;
                 Alarm newAlarm = new Alarm(numOfAlarms, aName.getText().toString(),
                         timePicker.getHour(), timePicker.getMinute(), critVal);
+                newAlarm.setDays(days);
                 Log.i("add alarm", newAlarm.toString());
                 SharedPreferences.Editor edit = prefs.edit();
                 Gson gson = new Gson();
@@ -106,7 +106,84 @@ public class AddAlarm extends AppCompatActivity {
             }
         });
 
-        //radioGroup.check(alarm.getCritical());
+        sun = findViewById(R.id.sunCheckBox);
+        mon = findViewById(R.id.monCheckBox);
+        tue = findViewById(R.id.tueCheckBox);
+        wed = findViewById(R.id.wedCheckBox);
+        thu = findViewById(R.id.thuCheckBox);
+        fri = findViewById(R.id.friCheckBox);
+        sat = findViewById(R.id.satCheckBox);
+
+        sun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[0] = true;
+                else
+                    days[0] = false;
+            }
+        });
+
+        mon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[1] = true;
+                else
+                    days[1] = false;
+            }
+        });
+
+        tue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[2] = true;
+                else
+                    days[2] = false;
+            }
+        });
+
+        wed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[3] = true;
+                else
+                    days[3] = false;
+            }
+        });
+
+        thu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[4] = true;
+                else
+                    days[4] = false;
+            }
+        });
+
+        fri.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[5] = true;
+                else
+                    days[5] = false;
+            }
+        });
+
+        sat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    days[6] = true;
+                else
+                    days[6] = false;
+            }
+        });
+
     }
 
     public void back(){
