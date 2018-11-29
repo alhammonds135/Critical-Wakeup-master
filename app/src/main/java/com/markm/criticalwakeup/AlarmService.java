@@ -135,7 +135,7 @@ public class AlarmService extends Service {
         Intent activeAlarm = new Intent();
 
         // Here, we are checking to see what the output of the random was
-        switch(1) {
+        switch(3) {
             case 1:
                 activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
                 activeAlarm.putExtra("difficulty", 1);
