@@ -57,7 +57,13 @@ public class MathPuzzle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 value = sol.getText().toString();
-                inSol = Integer.parseInt(value);
+                if(value.equals("")){
+                    Toast.makeText(MathPuzzle.this, "Enter a number", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    inSol = Integer.parseInt(value);
+                }
+
 
                 if(total==inSol){
                     Toast.makeText(MathPuzzle.this, "Correct", Toast.LENGTH_SHORT).show();

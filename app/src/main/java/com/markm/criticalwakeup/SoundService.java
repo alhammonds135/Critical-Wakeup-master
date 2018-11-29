@@ -68,7 +68,7 @@ public class SoundService extends Service {
                 player.prepare();
                 if (vibrator.hasVibrator()){
                     long[] vibratePattern = new long[]{0, 200, 100, 200, 100};
-                    vibrator.vibrate(vibratePattern, 5);
+                    vibrator.vibrate(vibratePattern, 3);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

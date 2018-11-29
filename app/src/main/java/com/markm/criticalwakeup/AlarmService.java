@@ -109,7 +109,7 @@ public class AlarmService extends Service {
                     }
                     else
                         addTime(currentAlarm);
-                    pickPuzzle();
+                    pickPuzzle(currentAlarm);
                 }
             }
         }
@@ -176,27 +176,27 @@ public class AlarmService extends Service {
         edit.apply();
     }
 
-    public void pickPuzzle(){
+    public void pickPuzzle(Alarm alarm){
         sound = new Intent(getApplicationContext(), SoundService.class);
-        sound.putExtra("crit", critNum);
+        sound.putExtra("crit", alarm.getCritical());
         startService(sound);
         soundOn = true;
         Random generator = new Random();
         int number = generator.nextInt(3) + 1;
 
         Intent activeAlarm = new Intent();
-
+        //for demo purposes change it to critlevel
         // Here, we are checking to see what the output of the random was
-        switch(number) {
+        switch(alarm.getCritical()) {
             case 1:
                 activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
                 activeAlarm.putExtra("difficulty", 1);
                 break;
             case 2:
-                activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
+                activeAlarm.setClass(getApplicationContext(), MainActivity.class);
                 break;
             case 3:
-                activeAlarm.setClass(getApplicationContext(), MainActivity.class);
+                activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
                 break;
             default:
                 //defaults to math
