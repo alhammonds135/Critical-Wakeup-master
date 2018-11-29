@@ -38,6 +38,7 @@
         <activity android:name=".AddAlarm"></activity>
         <activity android:name=".BarcodeActivity"></activity>
         <activity android:name=".MathPuzzle" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

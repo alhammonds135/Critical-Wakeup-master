@@ -85,7 +85,7 @@ public class EditAlarm extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Alarm updatedAlarm = new Alarm((int) (Math.random() * 1000), aName.getText().toString(),
+                Alarm updatedAlarm = new Alarm(alarm.getId(), aName.getText().toString(),
                         timePicker.getHour(), timePicker.getMinute(), critVal);
                 if(on){
                     updatedAlarm.turnOn();
@@ -98,7 +98,7 @@ public class EditAlarm extends AppCompatActivity {
                 SharedPreferences.Editor edit = prefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(updatedAlarm);
-                String key = "Alarm" + index;
+                String key = "Alarm" + alarm.getId();
                 edit.putString(key, json);
                 edit.apply();
                 Toast.makeText(EditAlarm.this, "Alarm Saved.", Toast.LENGTH_SHORT).show();

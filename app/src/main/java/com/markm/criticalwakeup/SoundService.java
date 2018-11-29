@@ -16,7 +16,7 @@ import java.io.IOException;
 public class SoundService extends Service {
 
     private MediaPlayer player;
-    private String Tag = "\nRandom Letter Service,";
+    private String Tag = "\nSound Service,";
     private int critNum;
     Vibrator vibrator;
     class SoundServiceBinder extends Binder {

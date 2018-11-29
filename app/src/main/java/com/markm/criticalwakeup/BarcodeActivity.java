@@ -45,4 +45,9 @@ public class BarcodeActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        //disabled
+    }
 }

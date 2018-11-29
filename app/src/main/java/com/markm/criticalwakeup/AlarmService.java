@@ -74,6 +74,7 @@ public class AlarmService extends Service {
             for (int i = 0; i < alarmsList.size(); i++) {
                 //System.out.println("in for loop");
                 Alarm currentAlarm = alarmsList.get(i);
+                critNum = currentAlarm.getCritical();
                 cal = Calendar.getInstance();
                 hour = currentAlarm.getHour();
                 min = currentAlarm.getMinute();
@@ -99,7 +100,8 @@ public class AlarmService extends Service {
                 }
                 else if (currentAlarm.isOn()){
                     Log.i(Tag, "Less than a min");
-                    currentAlarm.turnOff();
+                    alarmsList.get(i).turnOff();
+                    stopAlarm(currentAlarm);
                     pickPuzzle();
                 }
             }
@@ -110,18 +112,30 @@ public class AlarmService extends Service {
         isOn = false;
     }
 
+    public void stopAlarm(Alarm alarm){
+        alarm.turnOff();
+        Log.i("alarm service", alarm.toString());
+        SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(alarm);
+        String key = "Alarm" + alarm.getId();
+        edit.putString(key, json);
+        edit.apply();
+    }
+
     public void pickPuzzle(){
         sound = new Intent(getApplicationContext(), SoundService.class);
         sound.putExtra("crit", critNum);
         startService(sound);
         soundOn = true;
         Random generator = new Random();
-        int number = generator.nextInt(2) + 1;
+        int number = generator.nextInt(3) + 1;
 
         Intent activeAlarm = new Intent();
 
         // Here, we are checking to see what the output of the random was
-        switch(number) {
+        switch(1) {
             case 1:
                 activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
                 activeAlarm.putExtra("difficulty", 1);
@@ -129,9 +143,13 @@ public class AlarmService extends Service {
             case 2:
                 activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
                 break;
+            case 3:
+                activeAlarm.setClass(getApplicationContext(), MainActivity.class);
+                break;
             default:
                 //defaults to math
-                activeAlarm.setClass(getApplicationContext(), BarcodeActivity.class);
+                activeAlarm.setClass(getApplicationContext(), MathPuzzle.class);
+                activeAlarm.putExtra("difficulty", 1);
                 break;
         }
         activeAlarm.putExtra("hour", hour);

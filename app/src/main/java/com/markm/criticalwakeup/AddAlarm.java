@@ -56,12 +56,12 @@ public class AddAlarm extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Alarm newAlarm = new Alarm((int) (Math.random() * 1000), aName.getText().toString(),
-                        timePicker.getHour(), timePicker.getMinute(), critVal);
-                Log.i("add alarm", newAlarm.toString());
                 SharedPreferences prefs = getSharedPreferences("CriticalWakeup", MODE_PRIVATE);
                 int numOfAlarms = prefs.getInt("numOfAlarms", 0);
                 numOfAlarms++;
+                Alarm newAlarm = new Alarm(numOfAlarms, aName.getText().toString(),
+                        timePicker.getHour(), timePicker.getMinute(), critVal);
+                Log.i("add alarm", newAlarm.toString());
                 SharedPreferences.Editor edit = prefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(newAlarm);
