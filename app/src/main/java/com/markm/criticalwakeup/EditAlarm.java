@@ -34,6 +34,7 @@ public class EditAlarm extends AppCompatActivity {
     private boolean on;
     private CheckBox sun, mon, tue, wed, thu, fri, sat;
     private boolean[] days;
+    private boolean[] currentDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,6 @@ public class EditAlarm extends AppCompatActivity {
         final Alarm alarm = gson.fromJson(json, Alarm.class);
 
         onOff = findViewById(R.id.onOffSwitch);
-        //onOff.setTextOff("Off");
-        //onOff.setTextOn("On");
         if(alarm.isOn()) {
             on = true;
             onOff.setChecked(true);
@@ -60,6 +59,7 @@ public class EditAlarm extends AppCompatActivity {
             onOff.setChecked(false);
             onOff.setText("Off");
         }
+
         onOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +181,16 @@ public class EditAlarm extends AppCompatActivity {
         thu = findViewById(R.id.thuCheckBox);
         fri = findViewById(R.id.friCheckBox);
         sat = findViewById(R.id.satCheckBox);
+
+        /**currentDays = alarm.getDays();
+        sun.setChecked(currentDays[0]);
+        mon.setChecked(currentDays[1]);
+        tue.setChecked(currentDays[2]);
+        wed.setChecked(currentDays[3]);
+        thu.setChecked(currentDays[4]);
+        fri.setChecked(currentDays[5]);
+        sat.setChecked(currentDays[6]);
+        **/
 
         sun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
