@@ -44,6 +44,7 @@ public class AddAlarm extends AppCompatActivity {
         Gson gson = new Gson();
         Alarm alarm = gson.fromJson(json, Alarm.class);
         aName = findViewById(R.id.alarmName);
+        aName.setText("Alarm");
 
         crit = findViewById(R.id.level);
         crit.setText("Level:");
@@ -94,6 +95,8 @@ public class AddAlarm extends AppCompatActivity {
         low.setText("Low");
 
         radioGroup = findViewById(R.id.radioGroup);
+        radioGroup.check(R.id.low);
+        critVal = 1;
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

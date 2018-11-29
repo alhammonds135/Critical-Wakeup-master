@@ -100,6 +100,7 @@ public class AlarmService extends Service {
                     //Log.i(Tag, "More than 1 min");
                 }
                 else if ((currentAlarm.getAlarmDay() == cal.get(Calendar.DAY_OF_WEEK))&& currentAlarm.isOn() && minLeft == 0) {
+                    Log.i(Tag, "Hour: " + hour + " Calendar Hour: " + cal.get(Calendar.HOUR_OF_DAY) + " Hour Left: " + hourLeft);
                     Log.i(Tag, "\n\nMin: " + min + " Calendar Min: " + cal.get(Calendar.MINUTE) + " Min Left: " + minLeft);
                     Log.i(Tag, "Less than a min\n\n");
                     if (turnOff(currentAlarm)){
