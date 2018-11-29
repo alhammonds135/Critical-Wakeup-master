@@ -1,18 +1,13 @@
 package com.markm.criticalwakeup;
 
-import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -64,7 +59,7 @@ public class AlarmHome extends Activity {
             while (index <= numOfAlarms)
             {
                 TableRow tr = new TableRow(this);
-                tr.setWeightSum(10);
+                tr.setWeightSum(100);
                 Alarm alarm;
                 for (int i = 0; i < 2; i++){
                     if (index <= numOfAlarms) { //Make sure we don't go out of bounds with the second call
@@ -108,11 +103,20 @@ public class AlarmHome extends Activity {
                         button.setText(s);
                         TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         lp.setMargins(10, 10, 10, 10);
-                        lp.weight = 5;
+                        lp.weight = 50;
                         button.setTag(index);
                         button.setOnClickListener(alarmClicked);
-                        if(alarm.isOn())
-                            button.setBackgroundResource(R.drawable.alarm_button_on_style);//Custom created style
+                        if(alarm.isOn()) {
+                            if (alarm.getCritical() == 1) {
+                                button.setBackgroundResource(R.drawable.alarm_button_low_crit_style);//Custom created style
+                            }
+                            else if (alarm.getCritical() == 2){
+                                button.setBackgroundResource(R.drawable.alarm_button_mid_crit_style);
+                            }
+                            else {
+                                button.setBackgroundResource(R.drawable.alarm_button_high_crit_style);
+                            }
+                        }
                         else
                             button.setBackgroundResource(R.drawable.alarm_button_off_style);//Custom created style
 

@@ -157,7 +157,17 @@ public class EditAlarm extends AppCompatActivity {
                     critVal = 1;
             }
         });
-        radioGroup.check(alarm.getCritical());
+        
+        int defaultCrit = alarm.getCritical();
+        if(defaultCrit == 3){
+            high.setChecked(true);
+        }
+        else if(defaultCrit == 2) {
+            med.setChecked(true);
+        }
+        else {
+            low.setChecked(true);
+        }
     }
 
     public void back(){
